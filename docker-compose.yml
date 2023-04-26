@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  db:
-    container_name: inventory-it_db
+  snipeit_db:
+    container_name: snipeit_db
     image: mysql:5.6
     restart: unless-stopped
     env_file: .env
@@ -11,15 +11,15 @@ services:
     networks:
       - backend
 
-  app:
-    container_name: inventory-it
+  snipeit:
+    container_name: snipeit
     image: snipe/snipe-it:latest
     restart: unless-stopped
     env_file: .env
     depends_on:
-      - db
+      - snipeit_db
     ports:
-      - "10003:80"
+      - "80:80"
     networks:
       - backend
       - frontend
